@@ -61,3 +61,55 @@ SELECT * FROM dept_info;
 
 -- To remove a view, use the DROP VIEW command
 DROP VIEW dept_info;
+
+-- For each department whose average employee salary is more than $30,000, 
+-- retrieve the department name and the number of employees working 
+-- for that department. 
+SELECT dname, COUNT(*), AVG(salary)
+FROM department, employee
+WHERE dnumber = dno
+GROUP BY dname
+HAVING AVG(salary) > 30000;
+
+-- Retrieve all employees with a last name that starts the the character 'S'.
+SELECT * FROM employee
+WHERE lname LIKE 'S%';
+
+--  Find all employees that work on a project with the the word 'Product' in its name.
+SELECT * FROM employee
+WHERE ssn IN (SELECT essn FROM works_on
+              WHERE pno IN (SELECT pnumber FROM project
+                            WHERE pname LIKE '%Product%'));
+
+-- A view that has a department name, manager name, and manager salary for every department
+CREATE VIEW dept_managers AS
+SELECT dname, fname || ' ' || lname AS manager_name, salary
+FROM department, employee
+WHERE mgrssn = ssn;
+
+-- Look at the contents of your view...
+SELECT * FROM dept_managers;
+
+-- A view that has the employee name, supervisor name, and employee salary for
+-- each employee who works in the research department
+CREATE VIEW research_employees AS
+SELECT e.fname || ' ' || e.lname AS employee_name, 
+       s.fname || ' ' || s.lname AS supervisor_name, 
+       e.salary
+FROM employee e, employee s, department d
+WHERE e.superssn = s.ssn AND e.dno = d.dnumber AND d.dname = 'Research';
+
+-- Look at the contents of your view...
+SELECT * FROM research_employees;
+
+-- A view that has the project name, controlling department name, 
+-- number of employees, and total hours worked per week on the project 
+-- for each project
+CREATE VIEW project_info AS
+SELECT pname, dname, COUNT(*), SUM(hours)
+FROM project, works_on, department
+WHERE pnumber = pno AND dnum = dnumber
+GROUP BY dname, pname;
+
+-- Look at the contents of your view...
+SELECT * FROM project_info;
