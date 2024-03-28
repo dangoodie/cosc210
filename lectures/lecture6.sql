@@ -21,7 +21,6 @@ SELECT ''||a.bco||a.bno AS BSB, ''||ca.ano||ca.cssn AS ACC FROM account AS a
   JOIN customer_account AS ca ON ca.ano=a.anum;
 
 -- Display customers with a student account from Armidale branch
-
 SELECT c.name, a.atype, ca.balance, bb.b_address FROM customer AS c
   JOIN customer_account AS ca ON ca.cssn = c.ssn
   JOIN account AS a ON a.anum = ca.ano
