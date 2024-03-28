@@ -102,3 +102,45 @@ FROM (employee AS e LEFT OUTER JOIN employee as s ON e.superssn=s.ssn);
 
 -- Exercise 1
 -- a. Retrieve the first name and last name of all employees who do not work on the project with name 'ProductZ'
+SELECT fname,lname
+FROM employee AS e1
+WHERE NOT EXISTS (SELECT *
+                   FROM employee AS e2, works_on, project
+                 WHERE e2.ssn = e1.ssn AND
+                     works_on.essn = e2.ssn AND
+                      works_on.pno = project.pnumber AND
+                     pname = 'ProductZ');
+
+-- b. Retrieve the first name and last name of all employees that work on a project that 'John Smith' works on.
+  SELECT DISTINCT fname,lname
+  FROM employee AS e1, works_on AS wo1
+  WHERE e1.ssn = wo1.essn AND
+      wo1.pno IN (SELECT pno
+                     FROM works_on AS wo2, employee AS e2
+                   WHERE e2.ssn = wo2.essn AND
+                       e2.fname = 'John' AND
+                       e2.lname = 'Smith'
+                        );
+        
+-- c. List the project names of all projects that have least one employee working on them who are supervised by 'John James'.
+SELECT DISTINCT pname
+FROM employee AS e1, employee AS sup, works_on, project
+WHERE sup.ssn = e1.superssn AND
+    sup.fname = 'John' AND
+    sup.lname = 'James' AND
+    works_on.essn = e1.ssn AND
+    project.pnumber = works_on.pno;
+
+-- d. List names of employees that only work on the 'ProductX' project.
+SELECT fname, lname
+FROM employee AS e1, works_on AS wo1, project AS p1
+WHERE wo1.essn = e1.ssn AND
+    wo1.pno = p1.pnumber AND
+    p1.pname = 'ProductX' AND
+    NOT EXISTS(SELECT *
+               FROM employee as e2, works_on AS wo2, project AS p2
+               WHERE e1.ssn = e2.ssn AND
+                   e2.ssn = wo2.essn AND
+                   wo2.pno = p2.pnumber AND
+                   NOT pname = 'ProductX');
+
