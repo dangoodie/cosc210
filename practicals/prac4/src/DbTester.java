@@ -5,6 +5,9 @@ import java.util.*;
 public class  DbTester{
 
 	public static void main(String [] argv) throws Exception{
+		String username = System.getenv("USERNAME");
+		String password = System.getenv("PASSWORD");
+
 
 	    Connection conn = null;
 	    try
@@ -12,10 +15,10 @@ public class  DbTester{
 	      Class.forName("org.postgresql.Driver");
 	      
 
-      		String url = "jdbc:postgresql://localhost/<une_username>_apps_prac_4";
+      		String url = "jdbc:postgresql://localhost/prac_04";
 
 
-	      conn = DriverManager.getConnection(url,"<une_username>_apps", "<une_student_number>");
+	      conn = DriverManager.getConnection(url,username, password);
 	    }
 	    catch (ClassNotFoundException e)
 	    {
