@@ -46,30 +46,31 @@ class CreateEmployee {
     */
 
     BufferedReader bufRead = new BufferedReader(new InputStreamReader(System.in));
+    String firstName = "";
+    String minit = "";
+    String lastName = "";
+    String ssn = "";
+    int dno_int = 0;
 
     try {
       System.out.println("Please Enter the employee's First Name: ");
-      String firstName = bufRead.readLine();
+      firstName = bufRead.readLine();
 
       System.out.println("Please Enter the employee's middle initial: ");
-      String minit = bufRead.readLine();
+      minit = bufRead.readLine();
 
       System.out.println("Please Enter the employee's Last Name: ");
-      String lastName = bufRead.readLine();
+      lastName = bufRead.readLine();
 
       System.out.println("Please Enter the employee's Ssn: ");
-      String ssn = bufRead.readLine();
+      ssn = bufRead.readLine();
 
       System.out.println("Please Enter the employee's Department Number: ");
       String dno = bufRead.readLine();
 
-      int dno_int = Integer.parseInt(dno);
+      dno_int = Integer.parseInt(dno);
 
-      /*
 
-      Add the additional data fields here
-
-      */
 
 
     }catch (IOException err) {
@@ -113,11 +114,13 @@ class CreateEmployee {
       // This is where you will need to update the code to include
       // the data entered by the user.
 
-      uprs.updateString("fname", ... );
-      uprs.updateString("minit", ... );
-      uprs.updateString("lname", ... );
-      uprs.updateString("ssn", ... );
-      uprs.updateInt("dno", ... );
+      uprs.updateString("fname", firstName );
+      uprs.updateString("minit", minit );
+      uprs.updateString("lname", lastName );
+      uprs.updateString("ssn", ssn );
+      uprs.updateInt("dno", dno_int );
+
+
       //Insert the new row of data to the database
       uprs.insertRow();
       //Move the cursor back to the start of the ResultSet object

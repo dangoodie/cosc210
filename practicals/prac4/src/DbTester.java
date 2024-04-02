@@ -36,11 +36,12 @@ public class  DbTester{
 	    System.out.println("\n****Employees Currently Within the Database*****");
 	    System.out.println();
 	    //Print the column headings to the console
-            System.out.printf("%-12s %-12s %n", "First Name","Last Name");
-	    System.out.println("--------------------");
+            System.out.printf("%-12s %-12s %-12s %-12s %-12s %-12s %-12s %n", "First Name","Last Name", "Birth Date", "Sex", "Salary", "Department Name", "Department Location");
+	    System.out.println("---------------------------------------------------------------------------------------------------------------");
 
 	    // First we specify our query
-	    String query = "SELECT fname, lname FROM employee;";
+	    String query = "SELECT e.fname, e.lname, e.bdate, e.sex, e.salary, d.dname, dl.dlocation FROM employee AS e, department AS d, dept_locations AS dl"
+	    		+ " WHERE e.dno = d.dnumber AND d.dnumber = dl.dnumber;";
 	    Statement stmt = null;
 	    try {
 		//Create an sql statement object
@@ -51,7 +52,12 @@ public class  DbTester{
 		while (rs.next()) {
 		    String fName = rs.getString("fname");
 		    String lName = rs.getString("lname");
-		    System.out.printf("%-12s %-12s %n", fName,lName);
+			String bdate = rs.getString("bdate");
+			String sex = rs.getString("sex");
+			String salary = rs.getString("salary");
+			String dname = rs.getString("dname");
+			String dlocation = rs.getString("dlocation");
+		    System.out.printf("%-12s %-12s %-12s %-12s %-12s %-12s %-12s %n", fName,lName,bdate,sex, salary, dname, dlocation);
 		}
 	    } catch (SQLException e ) {
 		System.out.println(e);

@@ -63,9 +63,9 @@ public class  DbInsert{
         	uprs.moveToInsertRow();
 		//Add new employee's information to the new row of data
         	uprs.updateString("fname", "New_fname");
-		uprs.updateString("minit", "S");
-		uprs.updateString("lname", "New_lname");
-		uprs.updateString("ssn", "112233445");
+			uprs.updateString("minit", "S");
+			uprs.updateString("lname", "New_lname");
+			uprs.updateString("ssn", "112233445");
         	uprs.updateInt("dno", 5);
 		//Insert the new row of data to the database
         	uprs.insertRow();
