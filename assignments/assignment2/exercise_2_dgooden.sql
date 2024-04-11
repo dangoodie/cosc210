@@ -71,8 +71,3 @@ AND movie_title = '12 Angry Men'
 GROUP BY first_name, last_name
 HAVING COUNT(first_name) = 1;
                           
-SELECT movie_title, first_name, last_name, shipment_date
-FROM movies, customers, shipments
-WHERE movies.movie_id = shipments.movie_id
-AND customers.customer_id = shipments.customer_id
-ORDER BY last_name, first_name;
