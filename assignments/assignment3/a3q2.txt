@@ -1,0 +1,37 @@
+Identify functional dependencies
+    - student_id -> first_name. last_name, date_of_birth
+    - unit_code -> unit_name
+    - degree -> school, degree_length
+
+Define Keys
+    - student_id
+    - unit_code
+    - degree
+    - student_id, unit_code (composite key)
+
+
+Normalise the schema
+    Student Table
+        - student_id (Primary Key)
+        - first_name
+        - last_name
+        - date_of_birth
+        - degree
+    
+    Unit Table
+    	- unit_code (Primary Key)
+    	- unit_name
+
+    Degree Table
+    	- degree (Primary Key)
+    	- school
+    	- degree_length
+    	
+    Enrollment Table
+    	- student_id (Foreign Key)
+    	- unit_code (Foreign Key)
+    	
+Every table has full dependence on the primary key making it compliant with 3NF.
+The Enrollment table represent the relationship between a student and the units
+they are enrolled in. This being a composite key ensures that they cannot be enrolled
+in the same unit twice reducing redundancy and complying with 3NF.
