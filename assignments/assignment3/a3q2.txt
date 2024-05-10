@@ -7,7 +7,7 @@ Define Keys
     - student_id
     - unit_code
     - degree
-    - student_id, unit_code (composite key)
+    - student_id, unit_code, degree (composite key)
 
 
 Normalise the schema
@@ -16,7 +16,6 @@ Normalise the schema
         - first_name
         - last_name
         - date_of_birth
-        - degree
     
     Unit Table
     	- unit_code (Primary Key)
@@ -30,8 +29,6 @@ Normalise the schema
     Enrollment Table
     	- student_id (Foreign Key)
     	- unit_code (Foreign Key)
+    	- degree (Foreign Key)
     	
-Every table has full dependence on the primary key making it compliant with 3NF.
-The Enrollment table represent the relationship between a student and the units
-they are enrolled in. This being a composite key ensures that they cannot be enrolled
-in the same unit twice reducing redundancy and complying with 3NF.
+Every table fully depends on its primary key, ensuring compliance with third normal form (3NF). The Enrollment table represents the relationship between students and the units they are enrolled in, as well as the degrees these units count towards. Using a composite key prevents students from enrolling in the same unit for the same degree multiple times, thus reducing redundancy and maintaining 3NF compliance.
