@@ -1,0 +1,43 @@
+Database Schema: A, B, C, D, E
+Functional Dependancies
+	1. D -> CE
+	2. A -> B
+	3. B -> E
+	4. C -> B
+	
+Decomposition
+	R1 = {CAE}
+	R2 = {DB}
+	R3 = {ABD}
+	
+Step 1 + 2: 
+	- Create an initial matrix of size attribute i by relations j
+	- Place Bij in each empty cell
+	
+	    A   B   C   D   E
+	R1  B11 B12 B13 B14 B15
+	R2  B21 B22 B23 B24 B25
+	R3  B31 B32 B33 B34 B35
+	
+Step 3:
+	- Place Ai in each cell that corresponds to an attribute in the relation row
+	
+	    A   B   C   D   E
+	R1  A1  B12 A3  B14 A5 
+	R2  B21 A2  B23 A4  B25
+	R3  A1  A2  B33 A4  B35
+	
+Step 4:
+	- For all key attributes per row:
+		- Find cells in row containing key X with bij
+		- Place Ai in each cell associated with Y, if the FD exists in another row
+		- Repeat for all dependancies
+		
+	    A   B   C   D   E
+	R1  A1  A2  A3  B14 A5 
+	R2  B21 A2  A3  A4  A5 
+	R3  A1  A2  A3  A4  A5 
+	
+Step 5:
+	- If a row contains all Ai then the decomposition is lossless
+	This decomposition satisfies the requirements to be lossless as R3 contains all Ai values

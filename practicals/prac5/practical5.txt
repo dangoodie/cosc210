@@ -1,0 +1,12 @@
+-- Relational algebra practical
+
+1. Display customers with student account in Armidale branch
+customer_acc := (customer JOIN ssn=cssn customer_account) ano=anum customer_account
+student_acc := customer_acc WHERE atype='Student'
+student_bank := student_acc JOIN (bco, bno) = (bco, bnum) bank_branch
+armidale_student := student_bank WHERE b_address = 'Armidale'
+
+2. Lets display average, total and count of balances per branch.
+customer_acc := customer_acount JOIN ano=anum account
+customer_bank := customer_acc JOIN (bco,bno) = (bco,bnum) bank_branch
+balances_per_branch := AVERAGE, balance, SUM, balance, COUNT, balance (customer_bank) GROUP BY bnum
