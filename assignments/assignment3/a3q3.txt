@@ -35,9 +35,9 @@ Step 4:
 		
 	    A   B   C   D   E
 	R1  A1  A2  A3  B14 A5 
-	R2  B21 A2  A3  A4  A5 
-	R3  A1  A2  A3  A4  A5 
+	R2  B21 A2  B23 A4  A5
+	R3  A1  A2  B33 A4  A5 
 	
 Step 5:
 	- If a row contains all Ai then the decomposition is lossless
-	This decomposition satisfies the requirements to be lossless as R3 contains all Ai values
+	This decomposition does not satisfy the requirements to be lossless as no row contains all R3 values. In particular, the relation D -> CE is not preserved in any rows.
